@@ -17,20 +17,20 @@ close all;clear;clc;
 addpath('WZPUtil');
 
 %%% Control parameters %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-params.savePath = 'data/test';
+params.savePath = 'data/test3';
                                 % Data saving path
-params.totalNum = 50;           % Total number of samples
+params.totalNum = 2500;           % Total number of samples 
 params.sampleSize = 256;        % Size of generated sample
 params.multilook = [1,4];       % multilook [Azimuth, Range]
 params.demFolder = 'DEM/unzip';
                                 % Folder path containing multiple DEM (*.tif format)
                                 % You can download DEM files from: https://srtm.csi.cgiar.org/srtmdata/
-
+%实际上数量并不一样，是不是无效值的影响
 %%% output %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 params.savePNGFlag = 1;         % Save the *.png image corresponding to the data
 params.out.origin = 1;          % Original phase
 params.out.originWrapped = 1;   % Wrapped version of the original phase, i.e., noise-free interferogram
-params.out.interf = 1;          % Simulated interferogram
+params.out.interf = 1;          % Simulated interferogram (Need!!)
 params.out.coherence = 1;       % Estimated coherence
 params.out.deformBbox = 1;      % Location and category of deformation area
 params.out.VDRI = 1;            % Horizontal phase gradient + residual map
@@ -55,7 +55,7 @@ params.noiseSNRRange = [0.2,5]; % Need to specify when noiseType=1
 params.Parallel = 0;
 % if params.Parallel; delete(gcp('nocreate')); end
 
-%% Run
+%% Run 
 generate(params);
 
 %% Show samples

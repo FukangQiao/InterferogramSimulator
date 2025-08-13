@@ -22,7 +22,7 @@ end
 if ~islogical(BW)
     error('Input must be a 2-D binary image.');
 end
-
+% 与YOLO.yaml格式一样
 columnLabel = {'classId', 'xCenter', 'yCenter', 'width', 'height'};
 bbox=[];
 
@@ -31,7 +31,7 @@ bbox=[];
 if Num<1    
     return;
 end
-
+% 归一化xywh 0-1
 for idx=1:Num
     [y,x]=find(L==idx);
     x1 = min(x); x2 = max(x);
