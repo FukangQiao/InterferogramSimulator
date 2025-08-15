@@ -1,16 +1,9 @@
-% =========================================================================
-% Copyright:    WZP
+% ===========================================================
 % Filename:     generate.m
-% Description:  If you use this code, please cite:
-%               Wu, Zhipeng, et al. "Deep-learning based phase discontinuity prediction for two-dimensional phase unwrapping of SAR interferograms." IEEE Transactions on Geoscience and Remote Sensing (2021).
-%               Wu, Zhipeng, et al. "Deep Learning for the Detection and Phase Unwrapping of Mining-Induced Deformation in Large-Scale Interferograms." IEEE Transactions on Geoscience and Remote Sensing 60 (2021): 1-18.
-%
-% @author:      wuzhipeng
-% @email:       763008300@qq.com
-% @website:     https://wuzhipeng.cn/
-% @create on:   29-Jun-2021 12:55:53
-% @version:     Matlab 9.9.0.1467703 (R2020b)
-% =========================================================================
+% Date:   	 	2025-08-14
+% Author:    	Fukang Qiao
+% Description:  Main function for simulation multiple numbers
+% ===========================================================
 
 function generate(params)
 saveFolderNames = fieldnames(params.out);

@@ -19,7 +19,7 @@ end
 if nargin<3
     showFlag=0;
 end
-if ~islogical(BW)
+if ~islogical(BW)%判断大梯度形变相位是否大于2pai
     error('Input must be a 2-D binary image.');
 end
 % 与YOLO.yaml格式一样

@@ -1,16 +1,9 @@
-% =========================================================================
-% Copyright:    WZP
+% ===========================================================
 % Filename:     showSamples.m
-% Description:  If you use this code, please cite:
-%               Wu, Zhipeng, et al. "Deep-learning based phase discontinuity prediction for two-dimensional phase unwrapping of SAR interferograms." IEEE Transactions on Geoscience and Remote Sensing (2021).
-%               Wu, Zhipeng, et al. "Deep Learning for the Detection and Phase Unwrapping of Mining-Induced Deformation in Large-Scale Interferograms." IEEE Transactions on Geoscience and Remote Sensing 60 (2021): 1-18.
-%
-% @author:      wuzhipeng
-% @email:       763008300@qq.com
-% @website:     https://wuzhipeng.cn/
-% @create on:   20-Apr-2022 14:28:11
-% @version:     Matlab 9.11.0.1769968 (R2021b)
-% =========================================================================
+% Date:   	 	2025-08-14
+% Author:    	Fukang Qiao
+% Description:  Main function for Showing Sample data
+% ===========================================================
 
 function showSamples(params)
 

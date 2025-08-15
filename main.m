@@ -1,15 +1,6 @@
 % =========================================================================
-% Copyright:    WZP
 % Filename:     main.m
-% Description:  If you use this code, please cite:
-%               Wu, Zhipeng, et al. "Deep-learning based phase discontinuity prediction for two-dimensional phase unwrapping of SAR interferograms." IEEE Transactions on Geoscience and Remote Sensing (2021).
-%               Wu, Zhipeng, et al. "Deep Learning for the Detection and Phase Unwrapping of Mining-Induced Deformation in Large-Scale Interferograms." IEEE Transactions on Geoscience and Remote Sensing 60 (2021): 1-18.
-%
-% @author:      wuzhipeng
-% @email:       763008300@qq.com
-% @website:     https://wuzhipeng.cn/
-% @create on:   19-Apr-2022 15:01:24
-% @version:     Matlab 9.11.0.1769968 (R2021b)
+% Description:  InterferogramSimulator.m
 % =========================================================================
 
 %% Setting parameters
@@ -17,9 +8,9 @@ close all;clear;clc;
 addpath('WZPUtil');
 
 %%% Control parameters %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-params.savePath = 'data/test3';
+params.savePath = 'data/test6';
                                 % Data saving path
-params.totalNum = 2500;           % Total number of samples 
+params.totalNum = 2100;           % Total number of samples 
 params.sampleSize = 256;        % Size of generated sample
 params.multilook = [1,4];       % multilook [Azimuth, Range]
 params.demFolder = 'DEM/unzip';
@@ -37,14 +28,14 @@ params.out.VDRI = 1;            % Horizontal phase gradient + residual map
                                 % + vertical phase gradient + interferogram (4 channels)
 params.out.branchCut = 1;       % Horizontal branch-cut and vertical branch-cut (2 channels)
 % You can customize other types of output and implement them in "generateOne.m".
-
+% 如果不需要某种相位可以将其概率设置为-1
 %%% Add phase components with a certain probability (0-1) %%%%%%%%%%%%%%%%%
-params.probSlop = 0.1;          % Slope phase
+params.probSlop = 0.2;          % Slope phase
 params.probBuilding = 0.2;      % Building phase
 params.probTurbulence = 0.8;    % Atmospheric turbulence phase, i.e., fractal Perlin noises
-params.probDeform = 0.2;        % Distorted two-dimensional Gaussian surface
-params.probEarthquake = 0.2;    % Deformation caused by earthquakes
-params.probWater = 0.5;         % Completely decorrelated area (water area)
+params.probDeform = 0.8;        % Distorted two-dimensional Gaussian surface
+params.probEarthquake = -1;    % Deformation caused by earthquakes
+params.probWater = 0.2;         % Completely decorrelated area (water area)
 
 params.noiseType = 0;           % 0 : Deformation-related noise
                                 % 1 : Noise with random signal-to-noise ratio, not recommended
@@ -56,7 +47,7 @@ params.Parallel = 0;
 % if params.Parallel; delete(gcp('nocreate')); end
 
 %% Run 
-generate(params);
+generate(params); % 主要模拟参数在generateOne.m中修改
 
 %% Show samples
 showSamples(params);
