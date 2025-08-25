@@ -17,23 +17,23 @@ end
 controlPoints = 5;% Number of control points in each direction, each point corresponds to a random vector
 shiftParam = 20; % Strength of distortion文章里alpha
 strengthen = 5;% Emphasize the greater impact of proximity 文章里p
-% 位置随机，需不需要修改成0-1更大范围的
+% 位置随机 归一化[0,1]
 rowLocationRange = [0.3,0.7]; % Location of deformation center (0-1)
 colLocationRange = [0.3,0.7]; % Location of deformation center (0-1)
-mu = [randR(rowLocationRange)*m, randR(colLocationRange)*n];
+mu = [randR(rowLocationRange)*m, randR(colLocationRange)*n]; % u1 u2
 
 % Random Sigma
 N = 2;
-D = diag(rand(N,1));
-U = orth(rand(N,N));
-Sigma = U' * D * U;
-Sigma = Sigma*((m+n)*2);
+D = diag(rand(N,1)); % 二维随机对角阵
+U = orth(rand(N,N)); % 另一个二维随机矩阵正交基
+Sigma = U' * D * U; % 互相关矩阵：表示形变区域的形状和大小
+Sigma = Sigma*((m+n)*2); % s为缩放因子 此处为(m+n)*2
 
-[X1,X2] = meshgrid(1:m,1:n);
+[X1,X2] = meshgrid(1:m,1:n); % x1,x1
 X = [X1(:) X2(:)];
 p = mvnpdf(X, mu, Sigma); % 生成f(x)
 origin = reshape(p,m,n);
-originNorm = origin/max(max(origin)); % Normalization
+originNorm = origin/max(max(origin)); % Normalization [0,1]
 % 控制点随机向量场
 [uxmat,uymat] = randxymat(controlPoints,controlPoints);%文章里Vx Vy
 
@@ -54,7 +54,7 @@ for i=1:m
         % Pixel offset
         xShift = sum(sum(uxmat.*affect));
         yShift = sum(sum(uymat.*affect));
-        % 由于XY的偏移量不是整数
+        % 由于XY的偏移量不是整数，所以需要重采样
         result(i,j) = myInterp2(originNorm,i+yShift,j+xShift);
     end
 end

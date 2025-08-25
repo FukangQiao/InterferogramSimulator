@@ -88,7 +88,7 @@ name = num2str(i,'%05d');
 for idx=1:length(saveFolderNames)
     folderName = saveFolderNames{idx};
     if ~isfield(outputs,folderName);error([folderName ' is not included in the generated data, please check!']);end
-    if isnan(outputs.(folderName)); warning(['outputs.' folderName ' is nan, not saved.']);continue;end
+    if isnan(outputs.(folderName)); warning(['outputs.' folderName ' is nan, not saved.']);continue;end 
     if ismember(folderName,{'deformBbox'})
         if~isempty(outputs.(folderName))
             writematrix(outputs.(folderName),fullfile(params.savePath,folderName,[name,'.txt']),"Delimiter"," ");

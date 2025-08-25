@@ -44,14 +44,14 @@ deformComponent = zeros(size(terrainRelated));% 形变相位
 %%%%%% Distorted two-dimensional Gaussian surface
 if rand<params.probDeform
     ampRange = [-20*pi,20*pi]; % Amplitude range +-20pai
-    deformNorm = getOriginNorm(rows,cols);
+    deformNorm = getOriginNorm(rows,cols); % 二维高斯函数模拟形变相位 deformNorm为归一化到[0,1]的概率密度函数
     deformAmp = randR(ampRange); %生成强度范围内的随机数
     deformation = deformAmp.*deformNorm; % Phase range
     deformComponent = deformComponent+deformation;
 
     if params.out.deformBbox && abs(deformAmp)>(pi/2) % If the maximum deformation amplitude is too small, it is ignored.
-        % 由于二维高斯模拟 导致的形变为 Label=1
-        [bbox,columnLabel]=getBoundingBox(abs(deformation)>(pi/3),1,0);
+        % 由于二维高斯模拟 导致的形变为 Label=0 YOLO要求，二分类从0开始
+        [bbox,columnLabel]=getBoundingBox(abs(deformation)>(pi/3),0,0);
         deformBbox = [deformBbox;bbox];
 %         showBbox(wrapToPi(deformation),bbox);colormap jet;colorbar;
     end
